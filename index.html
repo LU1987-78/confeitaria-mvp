@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ConectaPro - Conectando Profissionais do Bairro</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="header-content">
+        <div class="logo">
+          <span class="logo-icon">🔗</span>
+          <h1 class="logo-text">ConectaPro</h1>
+        </div>
+        <nav class="nav" id="mainNav" style="display:none;">
+          <span class="user-greeting" id="userGreeting"></span>
+          <button class="btn-secondary" id="logoutBtn">Sair</button>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h2 class="hero-title">Conectando Clientes e Profissionais do Bairro</h2>
+        <p class="hero-subtitle">Encontre serviços de qualidade perto de você ou divulgue seu trabalho para toda a comunidade</p>
+      </div>
+    </div>
+  </section>
+
+  <main class="main-content">
+    <div class="container">
+      
+      <!-- Login / Cadastro Section -->
+      <section class="card" id="loginSection">
+        <div class="card-header">
+          <h2 class="card-title">Bem-vindo ao ConectaPro</h2>
+          <p class="card-description">Entre ou cadastre-se para começar</p>
+        </div>
+        <div class="card-body">
+          <form id="loginForm" class="form">
+            <div class="form-group">
+              <label for="usuarioNome" class="form-label">Nome completo</label>
+              <input type="text" id="usuarioNome" class="form-input" placeholder="Digite seu nome" required>
+            </div>
+            <div class="form-group">
+              <label for="usuarioTipo" class="form-label">Tipo de usuário</label>
+              <select id="usuarioTipo" class="form-select" required>
+                <option value="">Selecione uma opção</option>
+                <option value="cliente">Cliente - Buscar serviços</option>
+                <option value="prestador">Prestador - Oferecer serviços</option>
+              </select>
+            </div>
+            <button type="submit" class="btn-primary btn-full" id="loginBtn">Entrar na Plataforma</button>
+          </form>
+        </div>
+      </section>
+
+      <!-- Dashboard do Prestador -->
+      <section class="dashboard" id="prestadorDashboard" style="display:none;">
+        <div class="dashboard-header">
+          <h2 class="section-title">Meus Anúncios</h2>
+          <button class="btn-primary" id="novoAnuncioBtn">+ Novo Anúncio</button>
+        </div>
+        <div id="meusAnuncios" class="anuncios-grid"></div>
+      </section>
+
+      <!-- Modal de Cadastro de Anúncio -->
+      <div class="modal" id="anuncioModal" style="display:none;">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title">📋 Publicar Novo Anúncio</h3>
+            <button class="modal-close" id="closeModal">&times;</button>
+          </div>
+          <form id="anuncioForm" class="form">
+            <div class="form-group">
+              <label for="anuncioTitulo" class="form-label">Título do anúncio</label>
+              <input type="text" id="anuncioTitulo" class="form-input" placeholder="Ex: Encanador profissional" required>
+            </div>
+            <div class="form-group">
+              <label for="anuncioCategoria" class="form-label">Categoria</label>
+              <select id="anuncioCategoria" class="form-select" required>
+                <option value="">Selecione uma categoria</option>
+                <option value="Serviços Gerais">Serviços Gerais</option>
+                <option value="Beleza e Estética">Beleza e Estética</option>
+                <option value="Alimentação">Alimentação</option>
+                <option value="Reformas e Construção">Reformas e Construção</option>
+                <option value="Tecnologia">Tecnologia</option>
+                <option value="Educação">Educação</option>
+                <option value="Saúde e Bem-estar">Saúde e Bem-estar</option>
+                <option value="Outros">Outros</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="anuncioDesc" class="form-label">Descrição</label>
+              <textarea id="anuncioDesc" class="form-textarea" placeholder="Descreva seu serviço, experiência e diferenciais" rows="4" required></textarea>
+            </div>
+            <div class="form-group">
+              <label for="anuncioPreco" class="form-label">Preço (opcional)</label>
+              <input type="text" id="anuncioPreco" class="form-input" placeholder="Ex: R$ 50,00 ou A combinar">
+            </div>
+            <div class="form-group">
+              <label for="anuncioContato" class="form-label">Contato</label>
+              <input type="text" id="anuncioContato" class="form-input" placeholder="Telefone ou WhatsApp" required>
+            </div>
+            <div class="form-group">
+              <label for="anuncioImg" class="form-label">Imagem (opcional)</label>
+              <input type="file" id="anuncioImg" class="form-file" accept="image/*">
+              <small class="form-hint">Adicione uma foto para destacar seu anúncio</small>
+            </div>
+            <div class="form-actions">
+              <button type="button" class="btn-secondary" id="cancelarAnuncio">Cancelar</button>
+              <button type="submit" class="btn-primary" id="publicarAnuncio">Publicar Anúncio</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Busca e Filtros -->
+      <section class="search-section" id="buscaSection" style="display:none;">
+        <div class="search-bar">
+          <div class="search-input-wrapper">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="busca" class="search-input" placeholder="Buscar por serviço, profissional ou palavra-chave...">
+          </div>
+          <select id="filtroCategoria" class="filter-select">
+            <option value="">Todas as categorias</option>
+            <option value="Serviços Gerais">Serviços Gerais</option>
+            <option value="Beleza e Estética">Beleza e Estética</option>
+            <option value="Alimentação">Alimentação</option>
+            <option value="Reformas e Construção">Reformas e Construção</option>
+            <option value="Tecnologia">Tecnologia</option>
+            <option value="Educação">Educação</option>
+            <option value="Saúde e Bem-estar">Saúde e Bem-estar</option>
+            <option value="Outros">Outros</option>
+          </select>
+        </div>
+      </section>
+
+      <!-- Lista de Anúncios -->
+      <section class="anuncios-section" id="listaSection" style="display:none;">
+        <h2 class="section-title">📌 Anúncios Disponíveis</h2>
+        <div id="anuncios" class="anuncios-grid"></div>
+        <div id="nenhumAnuncio" class="empty-state" style="display:none;">
+          <span class="empty-icon">📭</span>
+          <h3>Nenhum anúncio encontrado</h3>
+          <p>Tente ajustar os filtros ou buscar por outros termos</p>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <p class="footer-text">© 2025 ConectaPro – Conectando talentos do bairro</p>
+        <div class="footer-links">
+          <a href="#" class="footer-link">Sobre</a>
+          <a href="#" class="footer-link">Termos de Uso</a>
+          <a href="#" class="footer-link">Privacidade</a>
+          <a href="#" class="footer-link">Contato</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
